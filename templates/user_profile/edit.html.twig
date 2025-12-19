@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block body %}
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white mb-6">Modifier mon profil</h2>
+        
+        <div class="rounded-2xl border border-white/10 bg-slate-900/60 p-8 shadow-2xl backdrop-blur-xl animate-[fadeIn_0.5s_ease-out]">
+            {{ form_start(form) }}
+                {{ form_row(form.username) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.plainPassword, {'label': 'Nouveau mot de passe (laisser vide pour ne pas changer)'}) }}
+                
+                <div class="flex gap-4 mt-6">
+                    <button type="submit" class="flex-1 rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 transition-all duration-200">
+                        Enregistrer
+                    </button>
+                    <a href="{{ path('app_user_profile') }}" class="flex-1 text-center rounded-md bg-white/10 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-white/20 transition-all duration-200">
+                        Annuler
+                    </a>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="max-w-md mx-auto">
+    <h1 class="text-2xl font-semibold tracking-tight mb-6 text-slate-50">Créer un compte</h1>
+
+    <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-xl shadow-black/50 animate-[fadeIn_0.25s_ease-out]">
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm, {'attr': {'class': 'space-y-4'}}) }}
+            <div class="space-y-1">
+                {{ form_row(registrationForm.username, {
+                    row_attr: {'class': 'space-y-1 text-xs text-slate-200'},
+                    attr: {
+                        class: 'w-full rounded-lg border border-slate-700 bg-slate-900/80 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all'
+                    }
+                }) }}
+            </div>
+
+            <div class="space-y-1">
+                {{ form_row(registrationForm.email, {
+                    row_attr: {'class': 'space-y-1 text-xs text-slate-200'},
+                    attr: {
+                        class: 'w-full rounded-lg border border-slate-700 bg-slate-900/80 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all'
+                    }
+                }) }}
+            </div>
+
+            <div class="space-y-1">
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Mot de passe',
+                    row_attr: {'class': 'space-y-1 text-xs text-slate-200'},
+                    attr: {
+                        class: 'w-full rounded-lg border border-slate-700 bg-slate-900/80 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all'
+                    }
+                }) }}
+            </div>
+
+            <div class="pt-1 text-xs text-slate-300">
+                {{ form_row(registrationForm.agreeTerms) }}
+            </div>
+
+            <button
+                type="submit"
+                class="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-primary-600 px-4 py-2.5 text-sm font-medium text-white shadow-lg shadow-primary-600/40
+                       hover:bg-primary-500 active:bg-primary-700 transition-transform transition-colors duration-150 hover:-translate-y-0.5"
+            >
+                S'inscrire
+            </button>
+        {{ form_end(registrationForm) }}
+
+        <div class="mt-6 border-t border-slate-800 pt-4 text-center text-xs text-slate-400">
+            <p>Déjà un compte ?
+                <a href="{{ path('app_login') }}" class="text-primary-300 hover:text-primary-200">Se connecter</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

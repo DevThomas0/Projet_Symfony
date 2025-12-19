@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Mon Site{% endblock %}
+
+{% block body %}
+<section class="grid gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)] items-center">
+    <div class="space-y-6">
+        <div class="space-y-3">
+            <p class="text-xs uppercase tracking-[0.2em] text-primary-300/80">Plateforme de services</p>
+            <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-slate-50">
+                Bienvenue sur <span class="text-primary-400">Mon Site</span>
+            </h1>
+            <p class="text-sm md:text-base text-slate-300 max-w-xl">
+                Gérez vos services, votre profil et vos demandes de contact dans une interface épurée,
+                pensée pour rester simple et agréable à utiliser.
+            </p>
+        </div>
+
+        {% if not app.user %}
+            <div class="flex flex-wrap gap-3">
+                <a href="{{ path('app_register') }}"
+                   class="inline-flex items-center px-4 py-2.5 rounded-lg bg-primary-600 text-sm font-medium text-white shadow-lg shadow-primary-600/40
+                          hover:bg-primary-500 active:bg-primary-700 transition-transform transition-colors duration-150 hover:-translate-y-0.5">
+                    Créer un compte
+                </a>
+                <a href="{{ path('app_login') }}"
+                   class="inline-flex items-center px-4 py-2.5 rounded-lg border border-slate-700 text-sm font-medium text-slate-100
+                          hover:border-primary-500 hover:text-primary-200 transition-colors duration-150">
+                    Se connecter
+                </a>
+            </div>
+        {% else %}
+            <div class="grid gap-4 sm:grid-cols-2">
+                <a href="{{ path('app_user_profile') }}"
+                   class="group rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3 flex flex-col gap-1
+                          hover:border-primary-500/60 hover:bg-slate-900/90 transition-colors duration-150">
+                    <span class="text-xs font-medium text-slate-400">Connecté en tant que</span>
+                    <span class="text-sm font-semibold text-slate-50 group-hover:text-primary-200">
+                        {{ app.user.username }}
+                    </span>
+                    <span class="text-xs text-slate-400">Voir et modifier mon profil</span>
+                </a>
+                <a href="{{ path('app_service_index') }}"
+                   class="group rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3 flex flex-col gap-1
+                          hover:border-primary-500/60 hover:bg-slate-900/90 transition-colors duration-150">
+                    <span class="text-xs font-medium text-slate-400">Services</span>
+                    <span class="text-sm font-semibold text-slate-50 group-hover:text-primary-200">
+                        Gérer mes services
+                    </span>
+                    <span class="text-xs text-slate-400">Créer, modifier et consulter vos services.</span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="relative">
+        <div class="absolute inset-0 bg-primary-600/30 blur-3xl rounded-full -z-10 opacity-40"></div>
+        <div class="rounded-2xl border border-slate-800/80 bg-slate-900/50 p-5 shadow-2xl shadow-black/60
+                    animate-[fadeIn_0.35s_ease-out]">
+            <p class="text-xs font-medium text-primary-200 mb-2">Aperçu rapide</p>
+            <ul class="space-y-2 text-xs text-slate-300">
+                <li class="flex items-center gap-2">
+                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                    Authentification, profil et gestion de compte
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="h-1.5 w-1.5 rounded-full bg-sky-400"></span>
+                    CRUD complet des services de l’entreprise
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="h-1.5 w-1.5 rounded-full bg-violet-400"></span>
+                    Formulaire de contact et pages légales
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

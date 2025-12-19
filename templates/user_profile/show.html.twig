@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white mb-6">Mon Profil</h2>
+        
+        <div class="rounded-2xl border border-white/10 bg-slate-900/60 p-8 shadow-2xl backdrop-blur-xl animate-[fadeIn_0.5s_ease-out]">
+            <div class="flex items-center justify-center mb-6">
+                <div class="h-20 w-20 rounded-full bg-indigo-500/20 flex items-center justify-center ring-4 ring-white/5">
+                    <span class="text-3xl font-bold text-indigo-400">{{ user.username|first|upper }}</span>
+                </div>
+            </div>
+
+            <dl class="space-y-6 divide-y divide-white/10">
+                <div class="pt-6 sm:flex sm:items-center sm:justify-between first:pt-0">
+                    <dt class="font-medium text-slate-300 sm:w-64 sm:flex-none sm:pr-6">Nom d'utilisateur</dt>
+                    <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
+                        <div class="text-white font-semibold">{{ user.username }}</div>
+                    </dd>
+                </div>
+                <div class="pt-6 sm:flex sm:items-center sm:justify-between">
+                    <dt class="font-medium text-slate-300 sm:w-64 sm:flex-none sm:pr-6">Email</dt>
+                    <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
+                        <div class="text-white font-semibold">{{ user.email }}</div>
+                    </dd>
+                </div>
+                <div class="pt-6 sm:flex sm:items-center sm:justify-between">
+                    <dt class="font-medium text-slate-300 sm:w-64 sm:flex-none sm:pr-6">Rôles</dt>
+                    <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
+                        <div class="flex gap-2 flex-wrap">
+                            {% for role in user.roles %}
+                                <span class="inline-flex items-center rounded-md bg-indigo-400/10 px-2 py-1 text-xs font-medium text-indigo-400 ring-1 ring-inset ring-indigo-400/30">
+                                    {{ role }}
+                                </span>
+                            {% endfor %}
+                        </div>
+                    </dd>
+                </div>
+            </dl>
+
+            <div class="mt-8 flex flex-col gap-3">
+                <a href="{{ path('app_user_profile_edit') }}" class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 transition-all">
+                    Modifier mon profil
+                </a>
+                
+                <form method="post" action="{{ path('app_user_profile_delete') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-red-500/10 px-3 py-2 text-sm font-semibold leading-6 text-red-400 shadow-sm hover:bg-red-500/20 hover:text-red-300 transition-all">
+                        Supprimer mon compte
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

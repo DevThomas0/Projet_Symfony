@@ -1,0 +1,58 @@
+{% use 'form_div_layout.html.twig' %}
+
+{# Widgets #}
+
+{% block form_widget_simple %}
+    {% set attr = attr|merge({
+        class: (attr.class|default('') ~ ' block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 bg-white/5')|trim
+    }) %}
+    {{ parent() }}
+{% endblock form_widget_simple %}
+
+{% block textarea_widget %}
+    {% set attr = attr|merge({
+        class: (attr.class|default('') ~ ' block w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 min-h-[120px] bg-white/5')|trim
+    }) %}
+    {{ parent() }}
+{% endblock textarea_widget %}
+
+{# Labels #}
+
+{% block form_label %}
+    {% set label_attr = label_attr|merge({
+        class: (label_attr.class|default('') ~ ' block text-sm font-medium leading-6 text-white mb-1')|trim
+    }) %}
+    {{ parent() }}
+{% endblock form_label %}
+
+{# Rows #}
+
+{% block form_row %}
+    <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %} class="mb-4">
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+        {{ form_help(form) }}
+    </div>
+{% endblock form_row %}
+
+{# Buttons #}
+
+{% block button_widget %}
+    {% set attr = attr|merge({
+        class: (attr.class|default('') ~ ' flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all duration-200')|trim
+    }) %}
+    {{ parent() }}
+{% endblock button_widget %}
+
+{# Errors #}
+
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        <div class="mt-1 text-sm text-red-500">
+            {% for error in errors %}
+                <div>{{ error.message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock form_errors %}

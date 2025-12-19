@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Services{% endblock %}
+
+{% block body %}
+    <div class="flex min-h-full flex-col px-6 py-12 lg:px-8 max-w-7xl mx-auto">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight text-white">Services</h1>
+                <p class="text-sm text-slate-400 mt-1">Manage the services offered by your company.</p>
+            </div>
+            <a href="{{ path('app_service_new') }}"
+               class="inline-flex items-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 transition-all">
+                + New Service
+            </a>
+        </div>
+
+        {% if services is empty %}
+            <div class="rounded-2xl border border-dashed border-white/10 bg-slate-900/40 px-6 py-10 text-center text-sm text-slate-400 backdrop-blur-sm">
+                No services found.
+                <a href="{{ path('app_service_new') }}" class="text-indigo-400 hover:text-indigo-300 font-medium ml-1">
+                    Create your first service
+                </a>
+                .
+            </div>
+        {% else %}
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {% for service in services %}
+                    <a href="{{ path('app_service_show', {'UnService': service.id}) }}"
+                       class="group relative rounded-2xl border border-white/10 bg-slate-900/60 p-6 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/80 hover:border-indigo-500/30">
+                        <div class="flex flex-col h-full justify-between">
+                            <div>
+                                <div class="flex justify-between items-start gap-4">
+                                    <h2 class="text-lg font-semibold text-white group-hover:text-indigo-400 transition-colors">
+                                        {{ service.name }}
+                                    </h2>
+                                    {% if service.price %}
+                                        <span class="inline-flex items-center rounded-full bg-emerald-400/10 px-2 py-1 text-xs font-medium text-emerald-400 ring-1 ring-inset ring-emerald-400/20">
+                                            {{ service.price }} €
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                <p class="mt-4 text-sm text-slate-400 line-clamp-3">
+                                    {{ service.description ?: 'No description provided.' }}
+                                </p>
+                            </div>
+                            
+                            <div class="mt-6 flex items-center justify-between text-xs text-slate-500 pt-4 border-t border-white/5">
+                                <span>Created {{ service.createdAt ? service.createdAt|date('M d, Y') : '' }}</span>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Service{% endblock %}
+
+{% block body %}
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white mb-6">Create new Service</h2>
+        
+        <div class="rounded-2xl border border-white/10 bg-slate-900/60 p-8 shadow-2xl backdrop-blur-xl animate-[fadeIn_0.5s_ease-out]">
+            {{ include('service/_form.html.twig') }}
+            
+            <div class="mt-6 text-center">
+                <a href="{{ path('app_service_index') }}" class="text-sm font-semibold leading-6 text-indigo-400 hover:text-indigo-300 transition-colors">
+                    Back to list
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

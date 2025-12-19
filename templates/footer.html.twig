@@ -1,0 +1,19 @@
+<footer class="mt-8 border-t border-slate-800 bg-slate-950/80">
+    <div class="max-w-5xl mx-auto px-4 py-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+            <h5 class="text-sm font-semibold text-slate-300 tracking-wide">Liens utiles</h5>
+            <div class="mt-2 flex flex-wrap gap-3 text-xs text-slate-400">
+                <a href="{{ path('app_legal_mentions') }}" class="hover:text-primary-400 transition-colors">Mentions légales</a>
+                <a href="{{ path('app_legal_cgu') }}" class="hover:text-primary-400 transition-colors">CGU</a>
+                <a href="{{ path('app_legal_cgv') }}" class="hover:text-primary-400 transition-colors">CGV</a>
+                <a href="{{ path('app_legal_privacy') }}" class="hover:text-primary-400 transition-colors">Politique de confidentialité</a>
+                <a href="{{ path('app_legal_about') }}" class="hover:text-primary-400 transition-colors">Qui sommes-nous ?</a>
+            </div>
+        </div>
+        <div class="text-xs text-slate-500 space-y-1 text-right">
+            <a href="{{ path('app_contact') }}" class="block hover:text-primary-400 transition-colors">Formulaire de contact</a>
+            <p>&copy; {{ 'now'|date('Y') }} Mon Site. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+

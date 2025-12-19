@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Service{% endblock %}
+
+{% block body %}
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white mb-6">Service Details</h2>
+            
+            <div class="bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+                <dl class="divide-y divide-white/5">
+                    <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt class="text-sm font-medium leading-6 text-white">Name</dt>
+                        <dd class="mt-1 text-sm leading-6 text-slate-400 sm:col-span-2 sm:mt-0">{{ service.name }}</dd>
+                    </div>
+                    <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt class="text-sm font-medium leading-6 text-white">Price</dt>
+                        <dd class="mt-1 text-sm leading-6 text-slate-400 sm:col-span-2 sm:mt-0">{{ service.price }} €</dd>
+                    </div>
+                    <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt class="text-sm font-medium leading-6 text-white">Description</dt>
+                        <dd class="mt-1 text-sm leading-6 text-slate-400 sm:col-span-2 sm:mt-0">{{ service.description }}</dd>
+                    </div>
+                    <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt class="text-sm font-medium leading-6 text-white">Created At</dt>
+                        <dd class="mt-1 text-sm leading-6 text-slate-400 sm:col-span-2 sm:mt-0">{{ service.createdAt ? service.createdAt|date('Y-m-d H:i:s') : '' }}</dd>
+                    </div>
+                    {% if service.updatedAt %}
+                    <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt class="text-sm font-medium leading-6 text-white">Updated At</dt>
+                        <dd class="mt-1 text-sm leading-6 text-slate-400 sm:col-span-2 sm:mt-0">{{ service.updatedAt|date('Y-m-d H:i:s') }}</dd>
+                    </div>
+                    {% endif %}
+                </dl>
+
+                <div class="mt-8 flex items-center justify-between gap-x-6 border-t border-white/10 pt-6">
+                    <a href="{{ path('app_service_index') }}" class="text-sm font-semibold leading-6 text-white hover:text-indigo-400 transition-colors">Back to list</a>
+                    <div class="flex gap-4">
+                        <a href="{{ path('app_service_edit', {'ServiceToEdit': service.id}) }}" class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 transition-all">Edit</a>
+                        {{ include('service/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

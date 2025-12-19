@@ -1,17 +1,59 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bienvenue!{% endblock %}</title>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
+    {# TailwindCSS via CDN pour un front moderne et épuré #}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+
+    {% block stylesheets %}{% endblock %}
+
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    {% include 'header.html.twig' %}
+
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8">
+        <div class="space-y-3 mb-4">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div
+                        class="rounded-lg px-4 py-3 text-sm shadow-lg border
+                               {% if label == 'success' %}bg-emerald-900/60 border-emerald-500/40 text-emerald-50{% endif %}
+                               {% if label == 'danger' %}bg-rose-900/60 border-rose-500/40 text-rose-50{% endif %}
+                               {% if label == 'info' %}bg-sky-900/60 border-sky-500/40 text-sky-50{% endif %}
+                               animate-[fadeIn_0.25s_ease-out]">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
         {% block body %}{% endblock %}
-    </body>
+    </main>
+
+    {% include 'footer.html.twig' %}
+
+</body>
 </html>
