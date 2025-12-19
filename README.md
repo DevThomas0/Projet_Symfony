@@ -1,6 +1,6 @@
 # Projet_Symfony
 
-### Coe SQL
+### Code SQL
 ```SQL
 
 CREATE TABLE `user` (
