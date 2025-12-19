@@ -19,7 +19,7 @@ final class ContactController extends AbstractController
         // On créé le nouveau contact ici
         $LeContact = new Contact();
 
-        // Creation of the form using the type
+        // Création du formulaire avec le type
         $LeFormulaire = $this->createForm(ContactFormType::class, $LeContact);
 
         $LeFormulaire->handleRequest($LaRequest);
