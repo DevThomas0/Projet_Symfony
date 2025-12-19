@@ -1,5 +1,7 @@
 # Projet_Symfony
 
+**Nom de la BDD: projet_symfony
+
 ### Code SQL
 ```SQL
 
